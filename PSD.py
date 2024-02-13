@@ -311,17 +311,17 @@ class Bin:
 
         flag_params = {
             'beads': (self.fits, operator.gt, 'a', 'Beads', 1),
-            'bubbles': (self.data, operator.gt, 'max', 'Bubbles', 2),
+            'bubbles': (self.fits, operator.lt, 'max_ESD_diff', 'Bubbles', 2),
             'incomplete': (self.data, (operator.lt, operator.lt), ('max', 'mL_analyzed'), 'Incomplete Run', 3),
             'missing_cells': (self.fits, operator.lt, 'capture_percent', 'Missing Cells', 4),
             'biomass': (self.data, operator.lt, 'max', 'Low Biomass', 5),
-            'bloom': (self.fits, operator.gt, 'max_ESD_diff', 'Bloom', 6),
+            'bloom': (self.fits, operator.lt, 'max_ESD_diff', 'Bloom', 6),
             'humidity': (self.fits, operator.gt, 'humidity', 'High Humidity', 7)
         }
 
         full_flags = pd.DataFrame({'file': [], 'flag': [], 'priority': 10000})
         r_limited_flags = ['biomass', 'bloom']
-        esd_diff_flags = ['bloom']
+        esd_diff_flags = ['bubbles', 'bloom']
         r_flag = flag(self.fits, operator.lt, 'R^2', r_sqr, 'Low R^2', 7, False)
         if len(r_flag['file']) > 0:
             full_flags = pd.concat([full_flags, r_flag], ignore_index=True)

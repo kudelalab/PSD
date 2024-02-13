@@ -1,4 +1,4 @@
-from Bin import Bin
+from PSD import Bin
 
 '''''''''''''''''
 To generate data about a dataset's PSD from feature and hdr files, use the following format.
@@ -37,9 +37,9 @@ To generate data about a dataset's PSD from feature and hdr files, use the follo
     
 '''''''''''''''''
 
-b = Bin(feature_dir='bubbles', hdr_dir='bubbles')
+b = Bin(feature_dir='F:/IFCB104/features/2016', hdr_dir='F:/IFCB104/data/2016')
 b.plot_PSD(use_marker=False, save_graphs=False, start_fit=13)
-b.save_data('bubbles/results',
+b.save_data('scw_2016',
             r_sqr=0.5,
             beads=10 ** 9,
             bubbles=150,
